@@ -98,7 +98,47 @@ dt_adm date constraint fun_dt_nn2 not null,
 uf_fun char(2) constraint fun_uf_nn2 not null,
 cargo_fk references cargo)
 
-create table nota_fiscal
-(num_nf char(9) constraint nf_cd_pk primary key,
-dt_emissao date constraint nf_dt not null,
-total_nf number(1)
+create table n_fiscal
+(n_nf number(5) constraint nf_cd_pk primary key,
+dt_nf date constraint nf_dt_nn not null,
+total_nf number(10,2));
+
+desc n_fiscal
+select constraint_name, constraint_type from user_constraints where table_name = 'N_FISCAL'
+
+create table produto
+(cd_pro number(5) constraint prod_cd_pk primary key,
+nm_prod varchar2(30) constraint prod_mn_nn not null
+constraint prod_nm_uk unique,
+preco number(10, 2))
+
+select constraint_name, constraint_type from user_constraints where table_name = 'PRODUTO'
+
+create table tem
+(fk_nota number(5) constraint tem_nf_fk references n_fiscal,
+fk_prod number(5) constraint tem_prod_fk references produto)
+
+Inserindo dados 
+Comando DML - Data Manipulation Language
+Novas linhas:
+insert into nome_tabela values
+(valor1, valor2,..., valorN)
+
+Obs: campos: char, varchar ou varchar2 e date precisam de apóstrofe
+
+Exemplo 1
+conhecendo ou visualizando a estrutura 
+desc n_fiscal
+inserindo uma linha
+insert into n_fiscal values (1,'10-jan-00',5000);
+insert into n_fiscal values (2,'10-Dec-00',5000);
+verificando a inserção
+select * from n_fiscal
+
+descobrindo o padrão da data
+select sysdate from dual
+
+gravando dados fisicamente
+commit;
+
+
