@@ -141,4 +141,89 @@ select sysdate from dual
 gravando dados fisicamente
 commit;
 
+Aula 03 - 01/03/2023
+
+Ainda trabalhando com estruturas das tabelas
+
+DDL
+
+Create - Ok
+
+Alterando ou corrigindo uma estrutura
+alter table nome_tabela
+opções
+add column          - nova coluna
+add constraint      - nova regra
+modify              - modifica tipo e/ou tamanho de uma coluna
+drop column         - elimina uma coluna
+drop constraint     - elimina uma regra
+
+create table tb_teste
+(codigo number(2),
+nome number(10));
+
+incluindo uma nova coluna
+alter table tb_teste add dt_nasc date
+
+incluindo uma coluna com regra
+alter table tb_teste add cep char(8) not null
+
+incluindo a pk na coluna codigo
+alter table tb_teste add constraint pk_cod primary key (codigo)
+
+modificando apenas o tipo de dado
+alter table tb_teste modify nome varchar(10)
+
+modificando apenas o tamanho da coluna
+alter table tb_teste modify nome varchar(50)
+
+modificando o tamanho da coluna e o tipo ao mesmo tempo
+alter table tb_teste modify nome number(10)
+
+eliminando uma regra
+alter table tb_teste drop constraint pk_cod
+desc user_constraints
+select constraint_name from user_constraints where table_name = 'TB_TESTE'
+
+Eliminando uma coluna
+alter table tb_teste drop column nome
+
+Renomeando uma coluna
+alter table tb_teste rename column codigo to cod_cliente
+
+Renomeando uma constraint 
+alter table tb_teste rename constraint SYS_C003509438 to fiap
+select constraint_name from user_constraints where table_name = 'TB_TESTE'
+
+eliminando uma tabela 
+drop table nome_tabela
+drop table tb_teste
+desc cargo
+
+create table tb_teste1
+(codigo number(1) primary key)
+create table tb_teste2
+(codigo number(1) references tb_teste1)
+insert into tb_teste1 values(1)
+insert into tb_teste2 values(1)
+
+uso do cascade permite eliminar o relacionamento e depois dropar a tabela
+drop table tb_teste1 cascade constraints
+
+Atualizando dados
+
+Update atualiza os dados, já o alter table atualiza a tabela e suas caracteristicas
+
+operadores: aritiméticos: + - * / ()
+            relacionais: > >= < <= = != ou <>
+            lógicos: and or not
+
+update nome_tabela set nome_coluna = novo_valor
+
+update nome_tabela set nome_coluna = novo_valor
+where condição
+
+pegar o resto da aula no site
+
+
 
