@@ -68,4 +68,25 @@ for v_cont in 1..10 loop
 end loop;
 end;
 
+declare 
+    v_digito number(3) := &digito;
+    v_cont number(2) := 0;
+    v_par number(3) := 0;
+    v_impar number(3) := 0;
+begin
+while v_cont <= v_digito loop
+        IF MOD(v_cont, 2) = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('O número ' || v_cont || ' é PAR');
+            v_par := v_par + 1;
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('O número ' || v_cont || ' é ÍMPAR');
+            v_impar := v_impar + 1;
+        END IF; 
+    v_cont := v_cont + 1;
+    
+end loop;
+DBMS_OUTPUT.PUT_LINE('Quantidade de numeros pares: ' || v_par);
+DBMS_OUTPUT.PUT_LINE('Quantidade de numeros impares: ' || v_impar);
+end;
+
 
