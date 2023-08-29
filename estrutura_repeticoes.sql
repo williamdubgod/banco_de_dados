@@ -68,6 +68,7 @@ for v_cont in 1..10 loop
 end loop;
 end;
 
+//exercicio 2
 declare 
     v_digito number(3) := &digito;
     v_cont number(2) := 0;
